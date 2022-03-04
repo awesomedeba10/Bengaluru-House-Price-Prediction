@@ -9,3 +9,5 @@ MODEL_PATH = os.path.join(PROJECT_ROOT, 'models', 'bengaluru_home_prices_model.p
 SCALER_PATH = os.path.join(PROJECT_ROOT, 'models', 'bengaluru_home_prices_scaler.pickle')
 
 DATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'Bengaluru_House_Data.csv')
+
+CLEAN_DATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'Bengaluru_House_Data_cleaned.csv')

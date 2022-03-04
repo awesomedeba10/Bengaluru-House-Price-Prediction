@@ -50,12 +50,20 @@ def predict(location, total_sqft, bhk_size, bath):
 
 def render_prediction(container):
     container.caption('Closest Actual Price :')
-    container.dataframe(get_closest_data())
+    container.write(get_closest_data())
     container.info(f'Predicted Price: {st.session_state.predicted_val}')
 
 def get_closest_data():
-    df = load_data()
-    return df[df['location'] == st.session_state.features['location']].head(1)
+    df = load_data(load_clean=True)
+    filtered_df = df.loc[df['location'] == st.session_state.features['location']]
+
+    dist = (filtered_df['total_sqft'] - st.session_state.features['total_sqft']).abs() + \
+        (filtered_df['bath'] - st.session_state.features['bath']).abs() + \
+        (filtered_df['bhk_size'] - st.session_state.features['bhk_size']).abs()
+
+    closest_row = filtered_df.loc[dist.idxmin()].to_frame().T
+
+    return closest_row.iloc[:, 1:]
 
 @st.experimental_memo
 def get_model():
@@ -83,5 +91,8 @@ def get_cols(location_only=False):
     return feature_cols['data_columns']
 
 @st.experimental_memo
-def load_data():
+def load_data(load_clean=False):
+    if load_clean:
+        return pd.read_csv(CLEAN_DATA_PATH)
+
     return pd.read_csv(DATA_PATH)
