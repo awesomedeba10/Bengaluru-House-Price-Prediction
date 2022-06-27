@@ -11,7 +11,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
-        'About': "https://github.com/awesomedeba10"
+        'About': "https://github.com/awesomedeba10",
+        'Report a bug': "https://github.com/awesomedeba10/Bengaluru-House-Price-Prediction/issues",
     }
 )
 
