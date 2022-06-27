@@ -63,7 +63,8 @@ def get_closest_data():
 
     closest_row = filtered_df.loc[dist.idxmin()].to_frame().T
 
-    return closest_row.iloc[:, 1:]
+
+    return closest_row.iloc[:, :]
 
 @st.experimental_memo
 def get_model():
